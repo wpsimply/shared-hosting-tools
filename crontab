@@ -1,0 +1,8 @@
+MAILTO=""
+SHELL="/bin/bash"
+# WP Cron
+* *  * * *  flock -n /tmp/wp-cron.lock ~/bin/run-wp-cron.sh
+# Siteprotection
+00 *  * * *  ~/bin/siteprotection.sh 2>&1 | ~/bin/ingest.php siteprotection
+# Site health
+04 *  * * *  /usr/local/bin/php ~/bin/wp --quiet site-health check ~/site-health.yml 2>&1 | ~/bin/ingest.php site-health
