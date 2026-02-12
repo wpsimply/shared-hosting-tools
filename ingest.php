@@ -17,7 +17,7 @@ $tag = $argv[1] ?? 'stdout';
 @mkdir(dirname($logFile), 0700, true);
 
 $logger = new Logger('syslog');
-$handler = new RotatingFileHandler($logFile, 14, Logger::INFO, true, null, true);
+$handler = new RotatingFileHandler($logFile, 15, Logger::INFO, true, null, true);
 $handler->setFilenameFormat('{filename}-{date}', RotatingFileHandler::FILE_PER_DAY);
 $handler->setFormatter(new LineFormatter("%datetime% %context.user% %context.tag%: %message%\n", 'c', true, true));
 $logger->pushHandler($handler);

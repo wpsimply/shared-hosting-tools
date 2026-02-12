@@ -33,6 +33,9 @@ add_filter(
             case 'woocommerce-payments/woocommerce-payments.php':
                 $plugin_meta[] = '<a href="https://plugins.svn.wordpress.org/woocommerce-payments/trunk/changelog.txt" target="_blank">Changelog</a>';
                 break;
+            case 'yith-woocommerce-ajax-product-filter-premium/init.php':
+                $plugin_meta[] = '<a href="https://docs.yithemes.com/yith-woocommerce-ajax-product-filter/changelog/changelog-premium-version/" target="_blank">Changelog</a>';
+                break;
         }
         return $plugin_meta;
     },
