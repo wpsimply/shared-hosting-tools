@@ -1,0 +1,6 @@
+# BEGIN Canonical redirect
+RewriteEngine On
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !=example.com
+RewriteRule ^ https://example.com%{REQUEST_URI} [L,R=301]
+# END Canonical redirect
