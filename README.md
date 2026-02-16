@@ -17,7 +17,9 @@
 - Apache error log
 - PHP error log
 - WP Cron (Linux cron) output
+- WooCommerce logs
 - Action Scheduler failures
 - [Critical site health](https://github.com/szepeviktor/critical-site-health)
 - File changes (siteprotection.sh)
-- [HTML pages](https://github.com/szepeviktor/safe-website-upgrade)
+- [HTML page changes](https://github.com/szepeviktor/safe-website-upgrade)
+- [Synthetic transaction testing](https://www.npmjs.com/package/@playwright/test)
