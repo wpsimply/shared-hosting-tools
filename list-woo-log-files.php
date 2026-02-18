@@ -2,6 +2,8 @@
 
 // wp eval-file list-woo-log-files.php
 
+date_default_timezone_set('UTC');
+
 $log_files = array_filter(
     WC_Log_Handler_File::get_log_files(),
     static function ($log_file) {
