@@ -4,6 +4,7 @@ Monitor a website on shared hosting from your server through SSH.
 
 ## Installation
 
+- Set up public key SSH authentication
 - Copy binaries to `~/bin/`
 - Copy these to `~/bin/`: ingest.php siteprotection.sh elementor-check.php list-woo-log-files.php
 - Copy wp-cli.yml to home

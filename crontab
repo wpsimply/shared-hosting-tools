@@ -6,3 +6,5 @@ SHELL="/bin/bash"
 00 *  * * *  ~/bin/siteprotection.sh 2>&1 | ~/bin/ingest.php siteprotection
 # Site health
 04 *  * * *  /usr/local/bin/php ~/bin/wp --quiet site-health check ~/site-health.yml 2>&1 | ~/bin/ingest.php site-health
+# Nightly mark to create syslog.log
+#01 0  * * *  echo '-- MARK --' | ~/bin/ingest.php mark
