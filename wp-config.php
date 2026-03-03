@@ -12,7 +12,8 @@ register_shutdown_function(function () {
             $_SERVER['REQUEST_URI'] ?? '/',
             $_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.1',
             http_response_code(),
-            sys_getloadavg()[0] ?? 0, // CPU load
+            // sys_getloadavg()[0] ?? 0, // CPU load
+            timer_float(), // Seconds since the PHP started
             $_SERVER['HTTP_REFERER'] ?? '-',
             $_SERVER['HTTP_USER_AGENT'] ?? '-'
         ),
