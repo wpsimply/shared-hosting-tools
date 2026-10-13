@@ -36,6 +36,9 @@ add_filter(
             case 'yith-woocommerce-ajax-product-filter-premium/init.php':
                 $plugin_meta[] = '<a href="https://docs.yithemes.com/yith-woocommerce-ajax-product-filter/changelog/changelog-premium-version/" target="_blank">Changelog</a>';
                 break;
+            case 'b2bking/b2bking.php':
+                $plugin_meta[] = '<a href="https://b2bkingplugin.com/changelog/" target="_blank">Changelog</a>';
+                break;
         }
         return $plugin_meta;
     },
