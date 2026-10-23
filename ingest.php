@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 // Minimal Monolog ingester.
+// composer require --prefer-dist --update-no-dev monolog/monolog
 
 use Monolog\Logger;
 use Monolog\Handler\RotatingFileHandler;
