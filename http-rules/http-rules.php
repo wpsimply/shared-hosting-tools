@@ -54,8 +54,8 @@ function check(): int
     $ua       = $_SERVER['HTTP_USER_AGENT'] ?? '';
     $referer  = $_SERVER['HTTP_REFERER'] ?? '';
     $accept   = $_SERVER['HTTP_ACCEPT'] ?? '';
-    $header_list = array_map('strtolower', array_keys(getallheaders()));
     $is_rest  = preg_match('~^/wp-json(?:/|$)~', $path) === 1 || isset($_GET['rest_route']);
+    $header_list = implode(',', array_map('strtolower', array_keys(getallheaders())));
 
     // Add rule snippets here.
 
