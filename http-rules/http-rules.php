@@ -45,10 +45,6 @@ function in_cidr(string $ip, array $ranges): bool
 
 function check(): int
 {
-    if (PHP_SAPI === 'cli') {
-        return 200;
-    }
-
     $ip       = $_SERVER['REMOTE_ADDR'] ?? '';
     $protocol = $_SERVER['SERVER_PROTOCOL'] ?? '';
     $method   = $_SERVER['REQUEST_METHOD'] ?? '';
@@ -68,6 +64,10 @@ function check(): int
 
 function run(): void
 {
+    if (PHP_SAPI === 'cli') {
+        return;
+    }
+
     $status = check();
 
     if ($status !== 200) {
