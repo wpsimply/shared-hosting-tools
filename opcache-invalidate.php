@@ -50,15 +50,38 @@ try {
         throw new RuntimeException('Cannot write web endpoint.');
     }
     $context = stream_context_create(['http' => [
-        'method' => 'POST', 'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+        'method' => 'POST',
+        'header' => "Content-Type: application/x-www-form-urlencoded\r\nUser-Agent: OpcacheInvalidator/1.0\r\n",
         'content' => http_build_query(['token' => $token]),
         'timeout' => 30, 'follow_location' => 0, 'ignore_errors' => true,
     ]]);
-    $response = file_get_contents(rtrim(BASE_URL, '/').'/'.$name, false, $context);
+    $url = rtrim(BASE_URL, '/').'/'.$name;
+    $response = file_get_contents($url, false, $context);
     if ($response === false) {
         throw new RuntimeException('HTTP request failed.');
     }
-    $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+    $status = 'unknown HTTP status';
+    $contentType = 'unknown';
+    foreach ($http_response_header ?? [] as $header) {
+        if (str_starts_with($header, 'HTTP/')) {
+            $status = $header;
+        } elseif (stripos($header, 'Content-Type:') === 0) {
+            $contentType = trim(substr($header, strlen('Content-Type:')));
+        }
+    }
+    try {
+        $result = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+    } catch (JsonException $error) {
+        throw new RuntimeException(
+            "Invalid JSON response from {$url}: {$status}; Content-Type: {$contentType}; "
+            .strlen($response)." bytes; JSON error: {$error->getMessage()}",
+            0,
+            $error,
+        );
+    }
+    if (!is_array($result) || !is_bool($result['ok'] ?? null)) {
+        throw new RuntimeException("Unexpected response from {$url}: {$status}; missing boolean 'ok'.");
+    }
     echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR).PHP_EOL;
     $exitCode = ($result['ok'] ?? false) === true ? 0 : 1;
 } catch (Throwable $error) {
